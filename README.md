@@ -6,7 +6,7 @@ At the end of each year's competition, we release the benchmark instances and be
 ## What to find here
 
 For each year's League of Robot Runners competition, you will find:
-- Evaluation benchmark instances that were used in any round of the competition.
+- Evaluation benchmark instances that were used in the competition.
 - Best-known solutions for the evaluation benchmark instances.
 - Example instances that are released with the start-kit.
 - Benchmark generator (if available).
