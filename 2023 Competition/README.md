@@ -1,16 +1,16 @@
-# 2023 League of Robot Runners Benchmark Archive
+### 2023 Benchmark Archive
 This folder contains the benchmark instances for the 2023 League of Robot Runners competition:
-- [Example Instances](./Example%20Instances/): A set of example instances that are released with the start-kit.
-- [Main Round Evaluation Instances](./Main%20Round%20Evaluation%20Instances/): The instances used for the Main Round evaluation, together with best-known solutions created by participating teams.
-- [Test Round Evaluation Instances](./Test%20Round%20Evaluation%20Instances/): The instances used for the Test Round evaluation, together with best-known solutions created by participating teams.
-- Benchmark Generator: Will be released soon.
+- [Example Instances](./Example%20Instances/) that were released with the start-kit.
+- [Main Round Evaluation Instances](./Main%20Round%20Evaluation%20Instances/) together with best-known solutions created by participating teams.
+- [Test Round Evaluation Instances](./Test%20Round%20Evaluation%20Instances/) together with best-known solutions created by participating teams.
+- Problem Generator: Will be released soon.
 
-## Best Known Solutions
+### Best Known Solutions
 The following table lists the best-known solutions for the 2023 Main Round evaluation instances and 2023 Test Round evaluation instances, together with simulation time, # of agents, the domain of the instance, the team that submitted the solution, and the implementation that created the solution.
 
 *<sup>Note: the Submission ID in the table is a unique identifier of a submission. It helps to distinguish submissions with the same implementation/code but output solutions with different scores/total errands finished.</sup>*
 
-### Main Round
+#### Main Round
 
 | Instance | Total Errands Finished | Domain | # Agents | Simulation Time  | Solution | Team | Implementation | Submission ID |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -24,7 +24,7 @@ The following table lists the best-known solutions for the 2023 Main Round evalu
 | MR23-I-08 | 6059 | Random | 800 | 2000 | [MR23-I-08.json.zip](./Main%20Round%20Evaluation%20Instances/best_solutions/MR23-I-08.json.zip) | Team_Shadoks | [1248faae2d47f7616224775a0dcafa008c55900a](https://github.com/MAPF-Competition/Code_Archive/tree/master/2023%20Competition/Team_Shadoks/1248faae2d47f7616224775a0dcafa008c55900a)  | 6560c90d0f0c9f5516ce44b9 |
 | MR23-I-09 | 28954 | Game | 6500 | 5000 | [MR23-I-09.json.zip](./Main%20Round%20Evaluation%20Instances/best_solutions/MR23-I-09.json.zip) | Team_Pikachu | [2bf88d26affb60adfdb00aa3efa5f1e70e2f36a2](https://github.com/MAPF-Competition/Code_Archive/tree/master/2023%20Competition/Team_Pikachu/2bf88d26affb60adfdb00aa3efa5f1e70e2f36a2)  | 656941260f0c9f5516da72a4 |
 | MR23-I-10 | 194677 | Warehouse | 10000 | 5000 | [MR23-I-10.json.zip](./Main%20Round%20Evaluation%20Instances/best_solutions/MR23-I-10.json.zip) | Team_Shadoks | [e131115400c370760c8f065406b09351467a6980](https://github.com/MAPF-Competition/Code_Archive/tree/master/2023%20Competition/Team_Shadoks/e131115400c370760c8f065406b09351467a6980)  | 6565721e0f0c9f5516d45c5b |
-### Test Round
+#### Test Round
 
 | Instance | Total Errands Finished | Domain | # Agents | Simulation Time  | Solution | Team | Implementation | Submission ID |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
