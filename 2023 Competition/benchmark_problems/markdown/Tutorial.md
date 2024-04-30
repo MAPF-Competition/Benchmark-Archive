@@ -1,0 +1,169 @@
+## Tutorial
+
+ In the following tutorial, we will demonstrate how to generate a problem instance using the tools step by step.
+
+### Folder Structure
+```
+├── benchmark_problems
+|   ├── README.md
+|   ├── script
+|       ├── warehouse_generator.py
+|       ├── task_generator.py
+|       ├── benchmark_generator.py
+|       ├── problem_generator.py
+|       └── plot_static.py
+|    
+├── Main Round Evaluation Instances
+    ├── warehouse.domain
+    |   ├── warehouse.json
+    |   ├── maps
+    |   ├── agents
+    |   └── tasks
+    ├── game.domain
+    ├── random.domain
+    └── city.domain
+    
+```
+Each problem instance in this repository comprises four essential files: a map file delineating the environment, an agent file specifying initial configurations, a task file containing assigned tasks and  a JSON file detailing the paths to the map, agent files, and task files. A benchmark consists of multiple such instances on a designated map.
+
+ An example problem instance is available in [sortation_large.json](../2023-main/warehouse.domain/I-06.json). It looks as follows.
+ 
+```json
+{
+    "mapFile": "maps/sortation_large.map",
+    "agentFile": "agents/Sortation_10000.agents",
+    "teamSize": 10000,
+    "taskFile": "tasks/sortation_large.tasks",
+    "numTasksReveal": 1,
+    "taskAssignmentStrategy": "roundrobin"
+}
+```
+ 
+  This file should include the paths of the "mapFile", "agentFile", and "taskFile". Additionally, "teamSize" indicates the number of agents used in the instance, while other properties such as "numTasksReveal" and "taskAssignmentStrategy" pertain to task allocation strategies.
+
+The map file stores 4-connected grid map information, utilizing a format similar to Nathan's benchmark. A sample grid map is provided in [random-32-32-20.map](../../Main%20Round%20Evaluation%20Instances/random.domain/maps/random-32-32-20.map), while a typical warehouse grid map file can be found in [sortation_large.map](../../Main%20Round%20Evaluation%20Instances/warehouse.domain/maps/sortation_large.map), where "." denotes empty space, and "@" and "T" represent obstacles. In warehouse maps, "E" typically denotes emitter points, which are locations where items are delivered, and "S" denotes service points where items are picked up. Both emitter points and service points are traversable, meaning they can be accessed and navigated through within the warehouse environment.
+
+The agent file contains a series of possible initial positions on the map. An example can be found in [Paris_1_256_1500.agents](../../Main%20Round%20Evaluation%20Instances/city.domain/agents/Paris_1_256_1500.agents). Positions are stored as vertex indexes (i.e., vertex_id=x* row+y) within this file.
+
+The task file, such as [sortation_large.tasks](../../Main%20Round%20Evaluation%20Instances/warehouse.domain/tasks/sortation_large.tasks), stores sets of vertex indexes representing possible task locations on the map.
+
+Within the script folders, tools for generating benchmark instances are available. A tutorial on their usage will be presented in the following section.
+
+
+
+### 1. Warehouse Generator
+To generate a map,  we provide a tool for generating new warehouse maps.  Alternatively, you can download a grid map from [MAPF_Benchmark](https://movingai.com/benchmarks/mapf.html). 
+
+The Python script "warehouse_generator.py" generates a warehouse layout, as seen in [sortation_large.map](../script/sortation_large.map), featuring pickup stations and storage shelves. This script accepts parameters such as warehouse dimensions, the number of pickup stations, and optionally a configuration file to customize the warehouse layout.
+
+
+#### Usage
+```shell
+ python warehouse_generator.py [--config CONFIG] [--mapW MAP_WIDTH] [--mapH MAP_HEIGHT] [--mapName MAP_NAME] [--stationNum STATION_NUM]
+```
+#### Arguments
+- `--config CONFIG`: (Optional) Path to a YAML configuration file that contains the warehouse parameters. If not provided, you need to specify the other parameters individually.
+- `--mapW MAP_WIDTH`: (Required if --config is not provided) Width of the warehouse.
+- `--mapH MAP_HEIGHT`: (Required if --config is not provided) Height of the warehouse.
+- `--mapName MAP_NAME`: (Required if --config is not provided) Name of the generated warehouse map.
+- `--stationNum STATION_NUM`: (Required if --config is not provided) Number of pickup stations to be added in the warehouse.
+- `--emitterW (default 1) `: distance between two consequtive emitters
+- `--corridorW (default 1)`:  distance between two storage blocks
+- `--pillarW (default 4)`: width of the pillar
+- `--operW (default 5)`: distance between the pickup station and the sotrage area
+- `--storageSize (default [3,2])`: (width, height) of the storage
+
+
+#### Examples
+-  Generate a warehouse using [a configuration file](../script/sortation_medium.yaml) :
+```shell
+python ./script/warehouse_generator.py --config ./script/sortation_medium.yaml
+```
+![sortation](../imgs/sortation.png)
+- Generate a warehouse with individual parameters:
+```shell
+python warehouse_generator.py --mapW 57 --mapH 33 --mapName warehouse_map --stationNum 1000
+```
+![fullfilment](../imgs/fulfillment.png)
+
+<!-- #### Warehouse Structure
+The generated warehouse layout will have pickup stations (denoted by "E") and storages (shelves) represented by "@" symbols. The initial warehouse layout will have pillars ("@") around the warehouse boundaries (see [WarehouseGenerator.docx](https://docs.google.com/document/d/1jld9LjnqWVVvxwhDbbBMtZAWWO38twLNk-jOure7Ddo/edit?usp=sharing) for more details). -->
+
+### 2. Task Generator for warehouse maps
+After generating a warehouse map, we then can generate the task files based on the map.
+The Task Generator script "task_generator.py" is used to generate task files for a given map and agent configuration. It provides two types of task generation policy: random task generation and task generation with distribution based on average distance (see [TaskGenerator.md](./TaskGenerator.md) for more details).
+#### Example Usage
+```shell
+ python3 ./script/task_generator.py --mapFile /warehouse.domain/maps/warehouse_large.map  --taskNum 100 --taskFile ./tasks.tasks --m_buckets 5
+```
+The shell command generates a task file named "tasks.tasks" containing 100 tasks. It utilizes the "warehouse_large.map" and employs the distance-based generation policy with 5 buckets.
+#### Arguments
+- `--mapFile`: Path to the map file. The map file should be in the standard format.
+- `--taskNum`: Number of tasks to generate. Must be greater than or equal to 1.
+- `--taskFile`: Name of the output task file. The generated tasks will be saved to this file.
+- `--m_buckets`: Number of buckets for task generation with distribution based on average distance. If `-1` is provided, random policy for task generation will be used.
+- `--task_type_rl`: Relative likelihood of selecting an "E" (Endpoint) or an "S" (Startpoint) location. Default value is `[0.5, 0.5]`.
+- `--e_bucket_rl`: Relative likelihood of each "E" bucket. Default value is `[0.25, 0.25, 0.25, 0.25]`.
+- `--s_bucket_rl`: Relative likelihood of each "S" bucket. Default value is `[1]`.
+
+
+
+### 3. Benchmark Generator
+A benchmark may comprise multiple instances with varying numbers of agents. Instead of running the task generator individually for each agent count, we provide a benchmark generator capable of producing multiple instances in batches for a specified map.
+
+To utilize it, first generate the map and task files following the previous instructions. Then, execute the "benchmark_generator.py" script with the necessary command-line arguments to generate benchmark problems. Below are the available options:
+#### Example Usage
+```shell
+python3 ./script/benchmark_generator.py  --mapFile /warehouse.domain/maps/warehouse_large.map  --problemName warehouseTest --taskFile ./tasks.tasks  --team_sizes 100 200 300 --benchmark_folder ./test
+```
+
+
+This shell command generates three benchmark problem instances named "warehouseTest_100.json", "warehouseTest_200.json", and "warehouseTest_300.json" using the provided map and task file. These instances are generated for teams of sizes 100, 200, and 300, and are stored in the specified benchmark folder "./test". The resulting folder structure is as follows:
+
+```
+├── test
+    ├── warehouseTest_100.json
+    ├── warehouseTest_200.json
+    ├── warehouseTest_300.json
+    ├── warehouseTest
+        ├── maps
+        |   └── warehouse_large.map
+        ├── agents
+        |   ├── warehouseTest_100.agents
+        |   ├── warehouseTest_200.agents
+        |   ├── warehouseTest_300.agents
+        └── tasks
+            └── warehouse_large.tasks
+    
+```
+
+#### Arguments
+- `--mapFile`: Path to an existing map file. The map file should be in the standard format, generated by map_generator.py or any grid map.
+
+- `--taskFile`: Path to an existing task file generated by task_generator.py.
+
+- `--problemName`: The name of the output problem file (default name: 'problem').
+
+- `--teamSizes`: The number of agents in a team. Specify multiple values to generate multiple problems, each with a different team of agents. For example: --team_sizes 100 200 300.
+
+- `--benchmark_folder`: Path to place the resulting problem files.
+
+- `--revealNum`: Number of tasks revealed (should be greater than or equal to 1).
+
+- `--taskAssignmentStrategy`: Task assignment strategy (roundrobin, greedy), for warehouse maps.
+
+- `--isWarehouse: (default True)`: Whether the map is a warehouse
+
+- `--taskNum`: The number of tasks on grid maps 
+
+
+For those classical grid maps, there are no "E" and "S" working stations and the map itself might be disconnected. We provide another version for them that ensures the tasks for an agent are always connected. We generate task locations by randomly sampling locations from the largest connected component of the map.
+
+####  Example Usage
+```shell
+python3 ./script/benchmark_generator.py  --mapFile  /random.domain/maps/random-32-32-20.map  --problemName randomTest --taskNum 5 --team_sizes 100 200 300 --benchmark_folder ./test --isWarehouse False
+```
+<!-- # python3 ./script/benchmark_generator.py  --problemDir ./random.domain/ --mapFile random-32-32-20.map --agentFile random-32-32-20_test.agents --taskFile random-32-32-20_test.tasks --problemFile random-32-32-20_test.json --teamSize 10 --taskNum 5 -->
+
+
+This shell command generates a problem instance JSON file using the specified map, agent, and task files, for a team of 10 agents with 5 tasks, within the "random.domain" directory.
