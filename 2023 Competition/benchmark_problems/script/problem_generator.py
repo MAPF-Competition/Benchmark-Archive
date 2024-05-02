@@ -230,18 +230,3 @@ class ProblemGenerator:
         self.generate_txt()
 
 
-if __name__ == '__main__':
-    par = argparse.ArgumentParser(description='Arguments for instacne generator')
-    par.add_argument("--config", type=str, help="{ath to the configuration file", default=None)
-    par.add_argument('--problemDir',  type=str, help="Path to the problem directory")
-    par.add_argument('--mapFile',  type=str, help="map file in the problemDir/maps")
-    par.add_argument('--agentFile', type=str, default='tmp.agents')
-    par.add_argument('--taskFile', type=str, default='tmp.tasks')
-    par.add_argument('--problemFile', type=str, default='./tmp.json')
-    par.add_argument('--teamSize', type=int, help="Number of agents", default=1)
-    par.add_argument('--taskNum', type=int, help="Number of tasks per agent", default=1)
-    par.add_argument('--revealNum', type=int, help="Number of tasks revealed", default=1)
-    input_args = par.parse_args()
-
-    ins_gen = ProblemGenerator(input_args)
-    ins_gen.genrate_problem()
