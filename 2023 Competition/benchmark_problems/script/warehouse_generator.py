@@ -24,10 +24,10 @@ class WarehouseGenerator:
             with open(config_dir, mode="r", encoding="utf-8") as fin:
                 self.config = yaml.load(fin, Loader=yaml.FullLoader)
         else:  #  Load the input arguments
-            self.config["mapW"]:int = input_arg.mapW
-            self.config["mapH"]:int = input_arg.mapH
-            self.config["mapName"]:int = input_arg.mapName
-            self.config["stationNum"]:int = input_arg.stationNum
+            self.config["mapW"] = input_arg.mapW
+            self.config["mapH"] = input_arg.mapH
+            self.config["mapName"] = input_arg.mapName
+            self.config["stationNum"] = input_arg.stationNum
 
         assert self.config["mapW"] is not None
         assert self.config["mapH"] is not None
