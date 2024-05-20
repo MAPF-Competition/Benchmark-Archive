@@ -27,4 +27,10 @@ We provide customized pickup station layout for the users. The layout file conta
 - `@`: blocked space (obstacle)
 - `E`: emitter (the exact location for robots to pickup or drop their stuffs)
 
-Please refer to out `station.txt` as an example.
+The layout in the file is based on the pickup station shown on the west (i.e., the left-hand side) of the warehouse map. Please refer to out `station.txt` as an example.
+
+## Run the Program
+Simply put all the files under the same directory and run the command
+```
+python warehouse_generator.py --config ./warehouse_config.yaml
+```
