@@ -10,8 +10,7 @@
 |       ├── warehouse_generator.py
 |       ├── warehouse_task_generator.py
 |       ├── benchmark_generator.py
-|       ├── problem_generator.py
-|       └── plot_static.py
+|       └── problem_generator.py
 |    
 ├── Main Round Evaluation Instances
     ├── warehouse.domain
@@ -26,7 +25,7 @@
 ```
 Each problem instance in this repository comprises four essential files: a map file delineating the environment, an agent file specifying initial configurations, a task file containing assigned tasks and  a JSON file detailing the paths to the map, agent files, and task files. A benchmark consists of multiple such instances on a designated map.
 
- An example problem instance is available in [sortation_large.json](../2023-main/warehouse.domain/I-06.json). It looks as follows.
+ An example JSON file is available in [sortation_large.json](../2023-main/warehouse.domain/I-06.json). It looks as follows.
  
 ```json
 {
@@ -41,7 +40,7 @@ Each problem instance in this repository comprises four essential files: a map f
  
   This file should include the paths of the "mapFile", "agentFile", and "taskFile". Additionally, "teamSize" indicates the number of agents used in the instance, while other properties such as "numTasksReveal" and "taskAssignmentStrategy" pertain to task allocation strategies.
 
-The map file stores 4-connected grid map information, utilizing a format similar to Nathan's benchmark. A sample grid map is provided in [random-32-32-20.map](../../Main%20Round%20Evaluation%20Instances/random.domain/maps/random-32-32-20.map), while a typical warehouse grid map file can be found in [sortation_large.map](../../Main%20Round%20Evaluation%20Instances/warehouse.domain/maps/sortation_large.map), where "." denotes empty space, and "@" and "T" represent obstacles. In warehouse maps, "E" typically denotes emitter points, which are locations where items are delivered, and "S" denotes service points where items are picked up. Both emitter points and service points are traversable, meaning they can be accessed and navigated through within the warehouse environment.
+The map file stores 4-connected grid map information. A sample grid map is provided in [random-32-32-20.map](../../Main%20Round%20Evaluation%20Instances/random.domain/maps/random-32-32-20.map), while a typical warehouse grid map file can be found in [sortation_large.map](../../Main%20Round%20Evaluation%20Instances/warehouse.domain/maps/sortation_large.map), where "." denotes empty space, and "@" and "T" represent obstacles. In warehouse maps, "E" typically denotes emitter points, which are locations where items are delivered, and "S" denotes service points where items are picked up. Both emitter points and service points are traversable, meaning they can be accessed and navigated through within the warehouse environment.
 
 The agent file contains a series of possible initial positions on the map. An example can be found in [Paris_1_256_1500.agents](../../Main%20Round%20Evaluation%20Instances/city.domain/agents/Paris_1_256_1500.agents). Positions are stored as vertex indexes (i.e., vertex_id=x* row+y) within this file.
 
