@@ -9,7 +9,7 @@ import os
 from typing import List
 import sys
 
-class TaskGenerator:
+class WarehouseTaskGenerator:
     def __init__(self) -> None:
         pass
 
@@ -208,7 +208,7 @@ def print_info(args):
 
 if __name__=="__main__":
     args=parse_arguments()
-    TG=TaskGenerator()
+    TG=WarehouseTaskGenerator()
     if args.m_buckets==-1:
         tasks=TG.random_generate(args.taskNum,args.mapFile,args.task_type_rl)
     else:

@@ -10,7 +10,7 @@ import copy
 import yaml
 
 
-class WarehouseGenerator:
+class WarehouseMapGenerator:
     """Class for the warehouse generator
     Inputs: width, height, number of pickup stations
     """
@@ -392,7 +392,7 @@ if __name__ == "__main__":
     parser.add_argument("--config", type=str, help="path to the configuration file", default=None)
     args = parser.parse_args()
 
-    generator = WarehouseGenerator(input_arg=args)
+    generator = WarehouseMapGenerator(input_arg=args)
     generator.load_stations()
     generator.load_storages()
     # generator.load_more_storages()
