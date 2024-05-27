@@ -99,7 +99,7 @@ This shell command generates a problem instance JSON file using the specified ma
 ### 2. Generate Benchmarks for Warehouse Maps with Sepcified Distribution
 For warehouse benchmarks used in this competition, we provide tools to generate maps and tasks that closely mimic real-world warehouse distributions.
 
-#### 2.1 Warehouse Generator
+#### 2.1 Warehouse Map Generator
 To generate a map,  we provide a tool for generating new warehouse maps.  Alternatively, you can download a grid map from [MAPF_Benchmark](https://movingai.com/benchmarks/mapf.html). 
 
 The Python script "warehouse_generator.py" generates a warehouse layout, as seen in [sortation_large.map](../script/sortation_large.map), featuring pickup stations and storage shelves. This script accepts parameters such as warehouse dimensions, the number of pickup stations, and optionally a configuration file to customize the warehouse layout.
