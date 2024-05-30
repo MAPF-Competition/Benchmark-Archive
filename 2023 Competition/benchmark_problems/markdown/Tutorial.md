@@ -51,9 +51,9 @@ Within the script folders, tools for generating benchmark instances are availabl
 
 
 ### 1. Generate Random Benchmark Problems
-A benchmark may comprise multiple instances with varying numbers of agents. Instead of running the task generator individually for each agent count, we provide a benchmark generator capable of producing multiple instances in batches for a specified map.
+A benchmark may comprise multiple instances with varying numbers of agents. Instead of running the task generator individually for each agent count, we provide a benchmark generator capable of producing multiple instances in batches for a specified map (either a MovingAI map or a new warehouse map).
 
-We generate task locations by randomly sampling locations from the largest connected component of the map.
+We can generate task locations by randomly sampling locations from the largest connected component of the map.
 
 ####  Example Usage
 ```shell
@@ -96,7 +96,7 @@ python3 ./script/benchmark_generator.py  --mapFile  /random.domain/maps/random-3
 This shell command generates a problem instance JSON file using the specified map, agent, and task files, for a team of 10 agents with 5 tasks, within the "random.domain" directory.
 
 ### 2. Generate Benchmarks for Warehouse Maps with Specified Distribution
-For warehouse benchmarks used in this competition, we provide tools to generate maps and tasks that closely mimic real-world warehouse distributions.
+For warehouse benchmarks used in this competition, we provide tools to generate maps, tasks, and benchmark problems that closely mimic real-world warehouse distributions.
 
 #### 2.1 Warehouse Map Generator
 To generate a map,  we provide a tool for generating new warehouse maps.  Alternatively, you can download a grid map from [MAPF_Benchmark](https://movingai.com/benchmarks/mapf.html). 
