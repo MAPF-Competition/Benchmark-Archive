@@ -57,7 +57,7 @@ We generate task locations by randomly sampling locations from the largest conne
 
 ####  Example Usage
 ```shell
-python3 ./script/benchmark_generator.py  --mapFile  /random.domain/maps/random-32-32-20.map  --problemName randomTest --taskNum 5 --team_sizes 100 200 300 --benchmark_folder ./test --isWarehouse False
+python3 ./script/benchmark_generator.py  --mapFile  /random.domain/maps/random-32-32-20.map  --problemName randomTest --taskNum 5 --team_sizes 100 200 300 --benchmark_folder ./test 
 ```
 <!-- # python3 ./script/benchmark_generator.py  --problemDir ./random.domain/ --mapFile random-32-32-20.map --agentFile random-32-32-20_test.agents --taskFile random-32-32-20_test.tasks --problemFile random-32-32-20_test.json --teamSize 10 --taskNum 5 -->
 ```
@@ -95,7 +95,7 @@ python3 ./script/benchmark_generator.py  --mapFile  /random.domain/maps/random-3
 
 This shell command generates a problem instance JSON file using the specified map, agent, and task files, for a team of 10 agents with 5 tasks, within the "random.domain" directory.
 
-### 2. Generate Benchmarks for Warehouse Maps with Sepcified Distribution
+### 2. Generate Benchmarks for Warehouse Maps with Specified Distribution
 For warehouse benchmarks used in this competition, we provide tools to generate maps and tasks that closely mimic real-world warehouse distributions.
 
 #### 2.1 Warehouse Map Generator
