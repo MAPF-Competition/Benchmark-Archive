@@ -112,6 +112,7 @@ The Python script "warehouse_generator.py" generates a warehouse layout, as seen
 - `--mapW MAP_WIDTH`: (Required if --config is not provided) Width of the warehouse.
 - `--mapH MAP_HEIGHT`: (Required if --config is not provided) Height of the warehouse.
 - `--mapName MAP_NAME`: (Required if --config is not provided) Name of the generated warehouse map.
+- `--stationName`: (Required if --config is not provided) The file name of the pickup station layout, see the following description.
 - `--stationNum STATION_NUM`: (Required if --config is not provided) Number of pickup stations to be added in the warehouse.
 - `--emitterW (default 1) `: distance between two consequtive emitters
 - `--corridorW (default 1)`:  distance between two storage blocks
