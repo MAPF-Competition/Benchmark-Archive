@@ -3,7 +3,7 @@ This folder contains the benchmark instances for the 2023 League of Robot Runner
 - [Example Instances](./Example%20Instances/) that were released with the start-kit.
 - [Main Round Evaluation Instances](./Main%20Round%20Evaluation%20Instances/) together with best-known solutions created by participating teams.
 - [Test Round Evaluation Instances](./Test%20Round%20Evaluation%20Instances/) together with best-known solutions created by participating teams.
-- Problem Generator: Will be released soon.
+- [Problem Generator](./Problem%20Generator): python scripts for generating benchmark problems.
 
 ### Best Known Solutions
 The following table lists the best-known solutions for the 2023 Main Round evaluation instances and 2023 Test Round evaluation instances, together with simulation time, # of agents, the domain of the instance, the team that submitted the solution, and the implementation that created the solution.
