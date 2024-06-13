@@ -1,32 +1,41 @@
 # Benchmark Problem Generators
 
 This repo contains Python scripts to generate benchmark problem files used in the  [2023 LoRR competition](https://www.leagueofrobotrunners.org/).
+This readme gives a simple introduction. For detailed usage instructions and examples, please refer to the [Tutorial](./markdown/Tutorial.md).
 
-## Generators Overview
-### 1. Random Benchmark Generator: Generates random problems
+## Benchmark Generator
+
+The script `benchmark_generator.py` is used to create new problem instances. At a minimum, the program requires as input a map file, the sizes of agent teams, and the description of the task set. In the simplest usage, only the size of the task set is required and individual errands are randomly generated. We show this usage below:
+
 ```shell
 python3 ./script/benchmark_generator.py  --mapFile  /random.domain/maps/random-32-32-20.map  --problemName randomTest --taskNum 5 --team_sizes 100 200 300 --benchmark_folder ./test --isWarehouse False
 ```
 
-### 2. Generate Benchmarks for Warehouse Maps
+It is also possible to create problem instances using pre-generated task sets, which are specialised for certain types of maps (e.g. warehouse, see below). We show this usage below:
+```shell
+python3 ./script/benchmark_generator.py  --mapFile ./2023-main/warehouse.domain/maps/warehouse_large.map  --problemName warehouseTest --taskFile ./tasks.tasks  --team_sizes 100 200 300 --benchmark_folder ./test
+```
 
-#### 2.1 Warehouse Map Generator: Generates warehouse layouts.
-**Example Usage：**
+## Warehouse Map Generator
+
+The script `warehouse_map_generator.py` is used to create warehouse maps. We distinguish two types of warehouses: sortation and fulfilment. In the example below,
+we show how to generate a sortation map. The parameters of the map are given in a pre-specified configuration file (they can also be specified as command line arguments):
+
 ```shell
 python ./script/warehouse_map_generator.py --config ./scripts/sortation_config.yaml
 ```
 
-#### 2.2. Warehouse Task Generator: Generates task files based on the map.
-**Example Usage：**
+In the example below, we show how to generate a warehouse map (again, from a pre-specified configuration file):
+
+```shell
+python ./script/warehouse_map_generator.py --config ./scripts/warehouse_config.yaml
+```
+
+## Warehouse Task Generator
+
+The script `warehouse_task_generator.py` is used to generate customised task sets for warehouse maps. The task sets are generated according to a specific distribution.
+In the example below, we show how to generate a task set where tasks are categorised into 5 buckets according to the distances between distinguished types of locations on the warehouse map (emitter points and service points):
+
 ```shell
  python3 ./script/warehouse_task_generator.py --mapFile ./2023-main/warehouse.domain/maps/warehouse_large.map  --taskNum 100 --taskFile ./tasks.tasks --m_buckets 5
 ```
-#### 2.3. Benchmark Generator using the task files.
-**Example Usage：**
-```shell
-python3 ./script/benchmark_generator.py  --mapFile ./2023-main/warehouse.domain/maps/warehouse_large.map  --problemName warehouseTest --taskFile ./tasks.tasks  --team_sizes 100 200 300 --benchmark_folder ./test
-```
-For detailed usage instructions and examples, please refer to the [Tutorial](./markdown/Tutorial.md).
-
-## Tutorial
-For step-by-step instructions and detailed usage examples of each generator script, please refer to the [Tutorial](./markdown/Tutorial.md).
