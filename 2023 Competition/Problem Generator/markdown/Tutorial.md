@@ -56,9 +56,9 @@ A benchmark can include multiple instances with different numbers of agents. Ins
 
 ####  Example Usage
 ```shell
-python3 ./script/benchmark_generator.py  --mapFile  /random.domain/maps/random-32-32-20.map  --problemName randomTest --taskNum 5 --team_sizes 100 200 300 --benchmark_folder ./test 
+python ./script/benchmark_generator.py  --mapFile  ./script/random-32-32-20.map  --problemName randomTest --taskNum 5 --teamSizes 100 200 300 --benchmark_folder ./test 
 ```
-<!-- # python3 ./script/benchmark_generator.py  --problemDir ./random.domain/ --mapFile random-32-32-20.map --agentFile random-32-32-20_test.agents --taskFile random-32-32-20_test.tasks --problemFile random-32-32-20_test.json --teamSize 10 --taskNum 5 -->
+<!-- # python ./script/benchmark_generator.py  --problemDir ./random.domain/ --mapFile random-32-32-20.map --agentFile random-32-32-20_test.agents --taskFile random-32-32-20_test.tasks --problemFile random-32-32-20_test.json --teamSize 10 --taskNum 5 -->
 ```
 ├── test
     ├── randomTest_100.json
@@ -124,12 +124,13 @@ The Python script "warehouse_generator.py" generates a warehouse layout, as seen
 ##### Examples
 -  Generate a warehouse using [a configuration file](../script/sortation_medium.yaml) :
 ```shell
-python ./script/warehouse_generator.py --config ./script/sortation_medium.yaml
+cd script
+python ./warehouse_map_generator.py --config ./sortation_medium.yaml
 ```
 ![sortation](../imgs/sortation.png)
 - Generate a warehouse with individual parameters:
 ```shell
-python warehouse_generator.py --mapW 57 --mapH 33 --mapName warehouse_map --stationNum 1000
+python warehouse_map_generator.py --mapW 57 --mapH 33 --mapName test_warehouse.map --stationNum 1000
 ```
 ![fullfilment](../imgs/fulfillment.png)
 
@@ -140,7 +141,7 @@ After generating a warehouse map, we then can generate the task files based on t
 The Task Generator script "warehouse_task_generator.py" is used to generate task files for a given map and agent configuration. It provides two types of task generation policy: random task generation and task generation with distribution based on average distance (see [WarehouseTaskGenerator.md](./WarehouseTaskGenerator.md) for more details).
 ##### Example Usage
 ```shell
- python3 ./script/warehouse_task_generator.py --mapFile /warehouse.domain/maps/warehouse_large.map  --taskNum 100 --taskFile ./tasks.tasks --m_buckets 5
+ python ./script/warehouse_task_generator.py --mapFile /warehouse.domain/maps/warehouse_large.map  --taskNum 100 --taskFile ./tasks.tasks --m_buckets 5
 ```
 The shell command generates a task file named "tasks.tasks" containing 100 tasks. It utilizes the "warehouse_large.map" and employs the distance-based generation policy with 5 buckets.
 ##### Arguments
@@ -158,7 +159,7 @@ The shell command generates a task file named "tasks.tasks" containing 100 tasks
 After generating the map and task files following the previous instructions, execute the "benchmark_generator.py" script with the necessary command-line arguments to generate benchmark problems. Below are the available options:
 #### Example Usage
 ```shell
-python3 ./script/benchmark_generator.py  --mapFile /warehouse.domain/maps/warehouse_large.map  --problemName warehouseTest --taskFile ./tasks.tasks  --team_sizes 100 200 300 --benchmark_folder ./test
+python ./script/benchmark_generator.py  --mapFile ./script/sortation_large.map  --problemName warehouseTest --taskFile ./script/sortation_large.tasks --teamSizes 100 200 300 --benchmark_folder ./test
 ```
 
 

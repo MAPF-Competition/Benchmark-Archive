@@ -1,4 +1,4 @@
-from task_generator import WarehouseTaskGenerator
+from warehouse_task_generator import WarehouseTaskGenerator
 import numpy as np
 import argparse
 import easydict
@@ -86,8 +86,10 @@ class WarehouseBenchmarkGenerator:
 
         if args.benchmark_folder:
             self.create_benchmark_folders(args.benchmark_folder)
+   
         new_task = self.copy_file_to_folder(args.taskFile,args.benchmark_folder+"/tasks/")
         new_map = self.copy_file_to_folder(args.mapFile,args.benchmark_folder+"/maps/")
+        
         for num_agents in args.teamSizes:
             TG=WarehouseTaskGenerator()
             agent_file=args.problemName+"_"+str(num_agents)+".agents"
@@ -134,13 +136,65 @@ class RandomBenchmarkGenerator:
     def __init__(self, args) -> None:
         self.args=args
 
+    def move_file_to_folder(self,file_path, target_folder):
+        # Get the file name from the file path
+        file_name = os.path.basename(file_path)
+
+        # Create the target folder if it doesn't exist
+        if not os.path.exists(target_folder):
+            os.makedirs(target_folder)
+
+        # Construct the new file path in the target folder
+        new_file_path = os.path.join(target_folder, file_name)
+
+        # Move the file to the target folder
+        try:
+            shutil.move(file_path, new_file_path)
+        except shutil.SameFileError:
+            pass
+        # print(f"File '{file_name}' moved to '{target_folder}'.")
+        return new_file_path
+
+    def create_benchmark_folders(self, benchmark_folder):
+        subfolders = ["tasks", "maps", "agents"]
+
+        if not os.path.exists(benchmark_folder):
+            os.mkdir(benchmark_folder)
+            print(f"Folder '{benchmark_folder}' created.")
+
+        for subfolder in subfolders:
+            subfolder_path = os.path.join(benchmark_folder, subfolder)
+            if not os.path.exists(subfolder_path):
+                os.mkdir(subfolder_path)
+                print(f"Subfolder '{subfolder}' created in '{benchmark_folder}'.")
+
+    def copy_file_to_folder(self, file_path, target_folder):
+        # Get the file name from the file path
+        file_name = os.path.basename(file_path)
+
+        # Create the target folder if it doesn't exist
+        if not os.path.exists(target_folder):
+            os.makedirs(target_folder)
+
+        # Construct the new file path in the target folder
+        new_file_path = os.path.join(target_folder, file_name)
+
+        # Copy the file to the target folder
+        try:
+            shutil.copy(file_path, new_file_path)
+        except shutil.SameFileError:
+            pass
+        print(f"File '{file_name}' copied to '{target_folder}'.")
+        return new_file_path
+
     def generate_problem(self):
         if self.args.benchmark_folder:
             self.create_benchmark_folders(self.args.benchmark_folder)
-        new_task = self.copy_file_to_folder(self.args.taskFile,self.args.benchmark_folder+"/tasks/")
+        # new_task = self.copy_file_to_folder(self.args.taskFile,self.args.benchmark_folder+"/tasks/")
+        new_task= self.args.problemName+".tasks"
         new_map = self.copy_file_to_folder(self.args.mapFile,self.args.benchmark_folder+"/maps/")
         for num_agents in self.args.teamSizes:
-            PG=ProblemGenerator()
+            
             args=easydict.EasyDict()    
             args.agentFile=self.args.problemName+"_"+str(num_agents)+".agents"
             args.problemFile=self.args.problemName+"_"+str(num_agents)+".json"
@@ -150,21 +204,18 @@ class RandomBenchmarkGenerator:
             args.teamSize=num_agents
             args.problemDir=self.args.benchmark_folder
             args.taskNum=self.args.taskNum
+            args.config=None
+            print(args.taskFile)
 
-     
+            PG=ProblemGenerator(args)
             
             # TG.generate_agents(num_agents,args.mapFile,agent_file)
             # new_agent = self.move_file_to_folder(agent_file,args.benchmark_folder+"/agents/")
 
-            PG.generate_problem(args)
+            PG.generate_problem()
+        self.move_file_to_folder(self.args.benchmark_folder+"/"+new_task, self.args.benchmark_folder+"/tasks/")
 
 
-
-'''
-example usage
-python3 ./script/bechmark_generator.py  --mapFile ./warehouse.domain/maps/warehouse_large.map  --problemName warehouseTest --taskFile ./tasks.tasks  --teamSizes 100 200 300 --benchmark_folder ./test
-'''
-    
 
 
 if __name__=="__main__":

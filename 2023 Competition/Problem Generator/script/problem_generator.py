@@ -36,7 +36,7 @@ class ProblemGenerator:
         self.agents:List[Agent] = []
         self.process_args(in_args)
 
-        map_path = os.path.join(self.prob_dir, os.path.join('maps', self.map_file))
+        map_path = os.path.join(self.prob_dir,  self.map_file)
         self.height, self.width, self.env_map, num_free = load_map(map_path)
         self.num_of_steps:int = num_free * RANDOM_WALK_WEIGHT
         self.map_name = get_map_name(self.map_file)
@@ -223,7 +223,7 @@ class ProblemGenerator:
             json.dump(problem_file, fout, indent=4)
 
 
-    def genrate_problem(self):
+    def generate_problem(self):
         self.find_lcc()
         self.generate_agents()
         self.generate_task()
