@@ -1,8 +1,0 @@
-{
-    "mapFile": "maps\\sortation_large.map",
-    "agentFile": "agents\\warehouseTest_300.agents",
-    "teamSize": 300,
-    "taskFile": "tasks\\sortation_large.tasks",
-    "numTasksReveal": 1,
-    "taskAssignmentStrategy": "roundrobin"
-}
