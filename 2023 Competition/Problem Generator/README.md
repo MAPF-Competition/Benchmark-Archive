@@ -8,12 +8,12 @@ This readme gives a simple introduction. For detailed usage instructions and exa
 The script `benchmark_generator.py` is used to create new problem instances. At a minimum, the program requires as input a map file, the sizes of agent teams, and the description of the task set. In the simplest usage, only the size of the task set is required and individual errands are randomly generated. We show this usage below:
 
 ```shell
-python3 ./script/benchmark_generator.py  --mapFile  /random.domain/maps/random-32-32-20.map  --problemName randomTest --taskNum 5 --team_sizes 100 200 300 --benchmark_folder ./test --isWarehouse False
+python3 ./script/benchmark_generator.py  --mapFile  ./script/sortation_large.map  --problemName randomTest --taskNum 5 --teamSizes 100 200 300 --benchmark_folder ./test
 ```
 
 It is also possible to create problem instances using pre-generated task sets, which are specialised for certain types of maps (e.g. warehouse, see below). We show this usage below:
 ```shell
-python3 ./script/benchmark_generator.py  --mapFile ./2023-main/warehouse.domain/maps/warehouse_large.map  --problemName warehouseTest --taskFile ./tasks.tasks  --team_sizes 100 200 300 --benchmark_folder ./test
+python3 ./script/benchmark_generator.py  --mapFile ./script/sortation_large.map  --problemName warehouseTest --taskFile ./script/sortation_large.tasks --teamSizes 100 200 300 --benchmark_folder ./test
 ```
 
 ## Warehouse Map Generator
@@ -22,13 +22,13 @@ The script `warehouse_map_generator.py` is used to create warehouse maps. We dis
 we show how to generate a sortation map. The parameters of the map are given in a pre-specified configuration file (they can also be specified as command line arguments):
 
 ```shell
-python ./script/warehouse_map_generator.py --config ./scripts/sortation_config.yaml
+python ./script/warehouse_map_generator.py --config ./script/sortation_config.yaml
 ```
 
 In the example below, we show how to generate a warehouse map (again, from a pre-specified configuration file):
 
 ```shell
-python ./script/warehouse_map_generator.py --config ./scripts/warehouse_config.yaml
+python ./script/warehouse_map_generator.py --config ./script/warehouse_config.yaml
 ```
 
 ## Warehouse Task Generator
@@ -37,5 +37,5 @@ The script `warehouse_task_generator.py` is used to generate customised task set
 In the example below, we show how to generate a task set where tasks are categorised into 5 buckets according to the distances between distinguished types of locations on the warehouse map (emitter points and service points):
 
 ```shell
- python3 ./script/warehouse_task_generator.py --mapFile ./2023-main/warehouse.domain/maps/warehouse_large.map  --taskNum 100 --taskFile ./tasks.tasks --m_buckets 5
+ python3 ./script/warehouse_task_generator.py --mapFile ./script/sortation_small.map --taskNum 100 --taskFile ./tasks.tasks --m_buckets 5
 ```
