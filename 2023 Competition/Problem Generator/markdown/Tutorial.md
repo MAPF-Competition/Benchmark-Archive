@@ -141,7 +141,7 @@ After generating a warehouse map, we then can generate the task files based on t
 The Task Generator script "warehouse_task_generator.py" is used to generate task files for a given map and agent configuration. It provides two types of task generation policy: random task generation and task generation with distribution based on average distance (see [WarehouseTaskGenerator.md](./WarehouseTaskGenerator.md) for more details).
 ##### Example Usage
 ```shell
- python ./script/warehouse_task_generator.py --mapFile /warehouse.domain/maps/warehouse_large.map  --taskNum 100 --taskFile ./tasks.tasks --m_buckets 5
+ python ./script/warehouse_task_generator.py --mapFile ./script/warehouse_large.map  --taskNum 100 --taskFile ./tasks.tasks --m_buckets 5
 ```
 The shell command generates a task file named "tasks.tasks" containing 100 tasks. It utilizes the "warehouse_large.map" and employs the distance-based generation policy with 5 buckets.
 ##### Arguments
