@@ -132,11 +132,11 @@ To generate a map,  we provide a tool for generating new warehouse maps.  Altern
 The Python script "warehouse_generator.py" generates a warehouse layout, as seen in [sortation_large.map](../script/sortation_large.map), featuring pickup stations and storage shelves. This script accepts parameters such as warehouse dimensions, the number of pickup stations, and optionally a configuration file to customize the warehouse layout.
 
 
-##### Usage
+#### Usage
 ```shell
  python warehouse_generator.py [--config CONFIG] [--mapW MAP_WIDTH] [--mapH MAP_HEIGHT] [--mapName MAP_NAME] [--stationNum STATION_NUM]
 ```
-##### Arguments
+#### Arguments
 - `--config CONFIG`: (Optional) Path to a YAML configuration file that contains the warehouse parameters. If not provided, you need to specify the other parameters individually.
 - `--mapW MAP_WIDTH`: (Required if --config is not provided) Width of the warehouse.
 - `--mapH MAP_HEIGHT`: (Required if --config is not provided) Height of the warehouse.
@@ -150,7 +150,7 @@ The Python script "warehouse_generator.py" generates a warehouse layout, as seen
 - `--storageSize (default [3,2])`: (width, height) of the storage
 
 
-##### Examples
+#### Examples
 -  Generate a warehouse using [a configuration file](../script/sortation_medium.yaml) :
 ```shell
 python ./script/warehouse_map_generator.py --config ./sortation_medium.yaml
@@ -164,18 +164,18 @@ python ./script/warehouse_map_generator.py --mapW 57 --mapH 33 --mapName test_wa
 
 
 
-#### 3. Warehouse Task Generator
+### 3. Warehouse Task Generator
 
 After generating a warehouse map, we then can generate the task files based on the map.
 The Task Generator script "warehouse_task_generator.py" is used to generate task files for a given map and agent configuration. It provides two types of task generation policy: random task generation and task generation with distribution based on the average distance (see [WarehouseTaskGenerator.md](./WarehouseTaskGenerator.md) for more details).
 
-##### Example Usage
+#### Example Usage
 ```shell
  python ./script/warehouse_task_generator.py --mapFile ./script/warehouse_large.map  --taskNum 100 --taskFile ./tasks.tasks --m_buckets 5
 ```
 The shell command generates a task file named "tasks.tasks" containing 100 tasks. It utilizes the "warehouse_large.map" and employs the distance-based generation policy with 5 buckets. The resulting task file can be then used for generating benchmarks.
 
-##### Arguments
+#### Arguments
 - `--mapFile`: Path to the map file. The map file should be in the standard format.
 - `--taskNum`: Number of tasks to generate. Must be greater than or equal to 1.
 - `--taskFile`: Name of the output task file. The generated tasks will be saved to this file.
