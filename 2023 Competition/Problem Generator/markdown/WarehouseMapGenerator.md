@@ -1,4 +1,4 @@
-# Generating Warehouse
+# Generating Warehouse Map
 
 ## Introduction
 This document outlines the process of generating warehouse maps used in the competition. The goal is to generate a map file given the usser-specified configurations.
