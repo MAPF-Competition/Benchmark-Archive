@@ -34,7 +34,6 @@ python ./script/warehouse_map_generator.py --config ./sortation_config.yaml
 In the example below, we show how to generate a warehouse map (again, from a pre-specified configuration file):
 
 ```shell
-cd script
 python ./script/warehouse_map_generator.py --config ./warehouse_config.yaml
 ```
 
