@@ -129,7 +129,10 @@ For warehouse benchmarks used in this competition, we provide tools to generate 
 
 To generate a map,  we provide a tool for generating new warehouse maps.  Alternatively, you can download a grid map from [MAPF_Benchmark](https://movingai.com/benchmarks/mapf.html). 
 
-The Python script "warehouse_generator.py" generates a warehouse layout, as seen in [sortation_large.map](../script/sortation_large.map), featuring pickup stations and storage shelves. This script accepts parameters such as warehouse dimensions, the number of pickup stations, and optionally a configuration file to customize the warehouse layout.
+The Python script "warehouse_generator.py" generates a warehouse layout, as seen in [sortation_large.map](../script/sortation_large.map), featuring pickup stations and storage shelves. This script accepts
+a YAML configuration file, which specifies map parameters such as warehouse dimensions, the number of pickup stations, and optionally a configuration file to customize the warehouse layout. 
+Please refer to [WarehouseMapGenerator.md](./WarehouseMapGenerator.md) for detailed documentation on YAML configuration.
+
 
 <!--#### Usage
 
@@ -165,7 +168,6 @@ python ./script/warehouse_map_generator.py --mapW 57 --mapH 33 --mapName test_wa
 -->
 ![fullfilment](../imgs/fulfillment.png)
 
-Please refer to [WarehouseMapGenerator.md](./WarehouseMapGenerator.md) for detailed documentation on YAML configuration.
 
 ### 3. Warehouse Task Generator
 
