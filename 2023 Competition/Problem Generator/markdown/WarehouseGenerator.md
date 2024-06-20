@@ -23,14 +23,16 @@ Please refer to our `warehouse_config.yaml` as an example.
 
 ## Layout for the Pickup Stations
 We provide customized pickup station layout for the users. The layout file contains the width and the height of the pickup station, followed by the layout that should be of the same size as the provided width and height. The symbol used for the layout are as follows:
-- `.`: free space (grid)
+- `.`: free space (traversable)
 - `@`: blocked space (obstacle)
-- `E`: emitter (the exact location for robots to pickup or drop their stuffs)
+- `E`: emitter point (traversable)
+- `S`: service point (traversable)
 
+Emitter points and service points are potential tasks(errands) locations.
 The layout in the file is based on the pickup station shown on the west (i.e., the left-hand side) of the warehouse map. Please refer to out `station.txt` as an example.
 
 ## Run the Program
 Simply put all the files under the same directory and run the command
 ```
-python warehouse_generator.py --config ./warehouse_config.yaml
+python ./script/warehouse_map_generator.py --config ./warehouse_config.yaml
 ```
