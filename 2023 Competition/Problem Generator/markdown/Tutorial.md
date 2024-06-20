@@ -131,13 +131,12 @@ To generate a map,  we provide a tool for generating new warehouse maps.  Altern
 
 The Python script "warehouse_generator.py" generates a warehouse layout, as seen in [sortation_large.map](../script/sortation_large.map), featuring pickup stations and storage shelves. This script accepts parameters such as warehouse dimensions, the number of pickup stations, and optionally a configuration file to customize the warehouse layout.
 
+<!--#### Usage
 
-#### Usage
-```shell
- python warehouse_generator.py [--config CONFIG] [--mapW MAP_WIDTH] [--mapH MAP_HEIGHT] [--mapName MAP_NAME] [--stationNum STATION_NUM]
-```
 #### Arguments
-- `--config CONFIG`: (Optional) Path to a YAML configuration file that contains the warehouse parameters. If not provided, you need to specify the other parameters individually.
+
+- `--config CONFIG`: Path to a YAML configuration file that contains the warehouse parameters.
+
 - `--mapW MAP_WIDTH`: (Required if --config is not provided) Width of the warehouse.
 - `--mapH MAP_HEIGHT`: (Required if --config is not provided) Height of the warehouse.
 - `--mapName MAP_NAME`: (Required if --config is not provided) Name of the generated warehouse map.
@@ -148,21 +147,25 @@ The Python script "warehouse_generator.py" generates a warehouse layout, as seen
 - `--pillarW (default 4)`: width of the pillar
 - `--operW (default 5)`: distance between the pickup station and the sotrage area
 - `--storageSize (default [3,2])`: (width, height) of the storage
+-->
 
-
-#### Examples
--  Generate a warehouse using [a configuration file](../script/sortation_medium.yaml) :
+#### Example Usage
+-  Generate a warehouse sortation centre map using [sortation_medium.yaml](../script/sortation_medium.yaml) :
 ```shell
 python ./script/warehouse_map_generator.py --config ./sortation_medium.yaml
 ```
 ![sortation](../imgs/sortation.png)
-- Generate a warehouse with individual parameters:
+- Generate a warehouse fulfilment centre map using [warehouse_config.yaml](../script/warehouse_config.yaml):
 ```shell
+python ./script/warehouse_map_generator.py ---config ./warehouse_config.yaml
+```
+<!--```shell
 python ./script/warehouse_map_generator.py --mapW 57 --mapH 33 --mapName test_warehouse.map --stationNum 1000
 ```
+-->
 ![fullfilment](../imgs/fulfillment.png)
 
-
+Please refer to [WarehouseMapGenerator.md](./WarehouseMapGenerator.md) for detailed documentation on YAML configuration.
 
 ### 3. Warehouse Task Generator
 
