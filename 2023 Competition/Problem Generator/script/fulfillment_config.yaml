@@ -4,7 +4,7 @@ mapName: "warehouse_small.map"
 stationName: "fulfillment_picking_station.txt"
 stationNum: 1000
 storageSize: [3,2]  # (width, height)
-emitterW: 2     # distance between two consequtive emitters
+emitterW: 2     # distance between two consecutive emitters
 corridorW: 1    # distance between two storage blocks
 pillarW: 4  # width of the pillar
-operW: 5  # distance between the pickup station and the sotrage area
+operW: 5  # distance between the pickup station and the storage area
