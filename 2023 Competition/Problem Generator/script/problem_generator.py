@@ -182,6 +182,33 @@ class ProblemGenerator:
             pbar.close()
             assert len(agent.task_locs) == self.task_num
 
+    def generate_total_tasks(self):
+  
+        tasks=[]
+        pbar = tqdm.tqdm(total=self.task_num, desc='Generate tasks  ')
+        for t_cnt in range(self.task_num):
+           
+            # Generate task locations with random sampling in largest connected component
+            rand_row = random.randint(0, self.height-1)
+            rand_col = random.randint(0, self.width-1)
+            while  self.env_map[rand_row][rand_col] is False:
+                rand_row = random.randint(0, self.height-1)
+                rand_col = random.randint(0, self.width-1)
+            task_loc = (rand_row, rand_col)
+
+            tasks.append(task_loc)
+     
+            pbar.update(1)
+        pbar.close()
+
+        tmp_dir = os.path.join(self.prob_dir, 'tasks/')
+        if not os.path.exists(tmp_dir):
+            os.mkdir(tmp_dir)
+        with open(os.path.join(tmp_dir, self.task_file), mode='w', encoding='utf-8') as fout:
+            fout.write(str(self.task_num) + '\n')
+            for task in tasks:
+                _loc_ = encode_loc(self.width, task)
+                fout.write(str(_loc_) + '\n')
 
     def generate_txt(self):
         tmp_dir = os.path.join(self.prob_dir, 'agents/')
@@ -194,25 +221,14 @@ class ProblemGenerator:
                 _loc_ = encode_loc(self.width, agent.start_loc)
                 fout.write(str(_loc_) + '\n')
 
-        # Count the total number of tasks
-        total_task_num = 0
-        for agent in self.agents:
-            total_task_num += len(agent.task_locs)
-        assert total_task_num == self.team_size * self.task_num
+  
 
-        tmp_dir = os.path.join(self.prob_dir, 'tasks/')
-        if not os.path.exists(tmp_dir):
-            os.mkdir(tmp_dir)
+        
 
-        with open(os.path.join(tmp_dir, self.task_file), mode='w', encoding='utf-8') as fout:
-            fout.write(str(total_task_num) + '\n')
-            for tid in range(self.task_num):
-                for agent in self.agents:
-                    _loc_ = encode_loc(self.width, agent.task_locs[tid])
-                    fout.write(str(_loc_) + '\n')
-
+        
+        print(self.map_file, self.agent_file, self.team_size, self.task_file, self.reveal_num, self.prob_file)
         problem_file = {
-            "mapFile": "maps/" + self.map_file,
+            "mapFile": self.map_file,
             "agentFile": "agents/" + self.agent_file,
             "teamSize": self.team_size,
             "taskFile": "tasks/" + self.task_file,
@@ -226,7 +242,8 @@ class ProblemGenerator:
     def generate_problem(self):
         self.find_lcc()
         self.generate_agents()
-        self.generate_task()
+        # self.generate_task()
+        self.generate_total_tasks()
         self.generate_txt()
 
 
