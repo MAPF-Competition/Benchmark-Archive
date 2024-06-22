@@ -9,7 +9,7 @@ For each year's League of Robot Runners competition, you will find:
 - Evaluation instances and example problems that were used in the competition.
 - Best-known solutions for the evaluation instances.
 - Solution metrics and cross-references to implementations that produced the solutions.
-- Problem generators (Coming soon).
+- Python scripts for generating benchmark problems.
 
 ## Contact
 
