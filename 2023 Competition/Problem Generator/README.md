@@ -3,7 +3,12 @@
 This repo contains Python scripts to generate benchmark problem files used in the  [2023 LoRR competition](https://www.leagueofrobotrunners.org/).
 This readme gives a simple introduction. For detailed usage instructions and examples, please refer to the [Tutorial](./markdown/Tutorial.md).
 
-## Installation
+## Installation and Requirements
+
+Requirements:
+- Python 3.10 or higher
+- easydict
+  
 To get started with the scripts, you need to install the easydict package. You can install it using pip:
 ```shell
 pip install easydict
