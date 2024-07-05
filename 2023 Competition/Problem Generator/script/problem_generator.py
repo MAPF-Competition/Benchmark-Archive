@@ -239,11 +239,12 @@ class ProblemGenerator:
             json.dump(problem_file, fout, indent=4)
 
 
-    def generate_problem(self):
+    def generate_problem(self, task_generated=False):
         self.find_lcc()
         self.generate_agents()
         # self.generate_task()
-        self.generate_total_tasks()
+        if not task_generated:
+            self.generate_total_tasks()
         self.generate_txt()
 
 

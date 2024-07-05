@@ -1,10 +1,10 @@
-mapW: 57
-mapH: 33
-mapName: "warehouse_small.map"
-stationName: "fulfillment_picking_station.txt"
-stationNum: 1000
+mapWidth: 57
+mapHeight: 33
+output: "warehouse_small.map"
+stationConfig: "picking_station.txt"
+stationNumber: 1000
 storageSize: [3,2]  # (width, height)
-emitterW: 2     # distance between two consecutive emitters
-corridorW: 1    # distance between two storage blocks
-pillarW: 4  # width of the pillar
-operW: 5  # distance between the pickup station and the storage area
+stationDistance: 2     # distance between two consecutive emitters
+corridorWidth: 1    # distance between two storage blocks
+pillarWidth: 4  # width of the pillar
+operWidth: 5  # distance between the pickup station and the storage area

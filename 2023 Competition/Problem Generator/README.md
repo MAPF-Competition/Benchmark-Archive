@@ -27,14 +27,14 @@ python ./script/benchmark_generator.py  --mapFile ./script/sortation_large.map  
 The script `warehouse_map_generator.py` is used to create warehouse maps. We distinguish two types of warehouses: sortation and fulfilment. In the example below,
 we show how to generate a sortation map. The parameters of the map are given in a pre-specified configuration file (they can also be specified as command line arguments):
 
-```shell'
+```shell
 python ./script/warehouse_map_generator.py --config ./sortation_config.yaml
 ```
 
 In the example below, we show how to generate a warehouse map (again, from a pre-specified configuration file):
 
 ```shell
-python ./script/warehouse_map_generator.py --config ./warehouse_config.yaml
+python ./script/warehouse_map_generator.py --config ./fulfillment_config.yaml
 ```
 
 ## Warehouse Task Generator

@@ -29,11 +29,25 @@ class WarehouseMapGenerator:
             self.config["mapHeight"] = input_arg.mapHeight
             self.config["output"] = input_arg.output
             self.config["stationNumber"] = input_arg.stationNumber
+            self.config["pillarWidth"] = input_arg.pillarWidth
+            self.config["operWidth"] = input_arg.operWidth
+            self.config["stationConfig"] = input_arg.stationConfig
+            self.config["storageSize"] = input_arg.storageSize
+            self.config["stationDistance"] = input_arg.stationDistance
+            self.config["corridorWidth"] = input_arg.corridorWidth
+
 
         assert self.config["mapWidth"] is not None
         assert self.config["mapHeight"] is not None
         assert self.config["output"] is not None
         assert self.config["stationNumber"] is not None
+        assert self.config["pillarWidth"] is not None
+        assert self.config["operWidth"] is not None
+        assert self.config["stationConfig"] is not None
+        assert self.config["storageSize"] is not None
+        assert self.config["stationDistance"] is not None
+        assert self.config["corridorWidth"] is not None
+
 
         # Initialize an empty warehouse
         self.warehouse = []
@@ -185,10 +199,10 @@ class WarehouseMapGenerator:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Take config.yaml as input!")
     parser.add_argument("--config", type=str, help="path to the configuration file", default=None)
-    parser.add_argument("--mapWidth", type=int, help="map width")
-    parser.add_argument("--mapHeight", type=int, help="map height")
-    parser.add_argument("--output", type=str, help="output map file name")
-    parser.add_argument("--stationConfig", type=str, default="picking", help="station configuration")
+    parser.add_argument("--mapWidth", type=int, default=33, help="map width")
+    parser.add_argument("--mapHeight", type=int, default=57, help="map height")
+    parser.add_argument("--output", type=str, default="output.map", help="output map file name")
+    parser.add_argument("--stationConfig", type=str, default="picking_station.txt", help="station configuration")
     parser.add_argument("--stationNumber", type=int, default=np.inf, help="station number")
     parser.add_argument("--storageSize", type=int, nargs=2, default=[3,2], help="storage size")
     parser.add_argument("--stationDistance", type=int, default=2, help="Distance between stations")

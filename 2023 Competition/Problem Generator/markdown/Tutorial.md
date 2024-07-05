@@ -23,7 +23,7 @@
     └── city.domain
     
 ```
-Each problem instance in this repository comprises four essential files: a map file delineating the environment, an agent file specifying initial configurations, a task file containing assigned tasks and  a JSON file detailing the paths to the map, agent files, and task files. A benchmark is a collection of problem instances that all share the same map.
+Each problem instance in this repository comprises four essential files: a map file delineating the environment, an agent file specifying initial configurations, a task file containing assigned tasks and a JSON file detailing the paths to the map, agent files, and task files. A benchmark is a collection of problem instances that all share the same map.
 
  An example JSON file is available in [sortation_large.json](../2023-main/warehouse.domain/I-06.json). It looks as follows.
  
@@ -134,39 +134,50 @@ a YAML configuration file, which specifies map parameters such as warehouse dime
 Please refer to [WarehouseMapGenerator.md](./WarehouseMapGenerator.md) for detailed documentation on YAML configuration.
 
 
-<!--#### Usage
-
-#### Arguments
-
-- `--config CONFIG`: Path to a YAML configuration file that contains the warehouse parameters.
-
-- `--mapW MAP_WIDTH`: (Required if --config is not provided) Width of the warehouse.
-- `--mapH MAP_HEIGHT`: (Required if --config is not provided) Height of the warehouse.
-- `--mapName MAP_NAME`: (Required if --config is not provided) Name of the generated warehouse map.
-- `--stationName`: (Required if --config is not provided) The file name of the pickup station layout, see the following description.
-- `--stationNum STATION_NUM`: (Required if --config is not provided) Number of pickup stations to be added in the warehouse.
-- `--emitterW (default 1) `: distance between two consequtive emitters
-- `--corridorW (default 1)`:  distance between two storage blocks
-- `--pillarW (default 4)`: width of the pillar
-- `--operW (default 5)`: distance between the pickup station and the sotrage area
-- `--storageSize (default [3,2])`: (width, height) of the storage
--->
-
 #### Example Usage
--  Generate a warehouse sortation centre map using [sortation_medium.yaml](../script/sortation_medium.yaml) :
+
+Generate a warehouse sortation centre map using [sortation_medium.yaml](../script/sortation_medium.yaml) :
+
 ```shell
 python ./script/warehouse_map_generator.py --config ./sortation_medium.yaml
 ```
-![sortation](../imgs/sortation.png)
-- Generate a warehouse fulfilment centre map using [warehouse_config.yaml](../script/warehouse_config.yaml):
+
+or using command line arguments:
+
 ```shell
-python ./script/warehouse_map_generator.py ---config ./warehouse_config.yaml
+python ./script/warehouse_map_generator.py --mapWidth 200 --mapHeight 140 --output "sortation_medium.map" --stationConfig "sortation_emitter.txt" --storageSize 1 1 --stationDistance 1
 ```
-<!--```shell
-python ./script/warehouse_map_generator.py --mapW 57 --mapH 33 --mapName test_warehouse.map --stationNum 1000
+Example warehouse sortation centre map:
+![sortation](../imgs/sortation.png)
+
+##### Generate a warehouse fulfilment centre map using [fulfillment_config.yaml](../script/fulfillment_config.yaml):
+```shell
+python ./script/warehouse_map_generator.py --config ./fulfillment_config.yaml
 ```
--->
+
+or using command line arguments:
+
+```shell
+python ./script/warehouse_map_generator.py --mapWidth 57 --mapHeight 33 --output "warehouse_small.map" --stationConfig "picking_station.txt" --storageSize 3 2
+```
+Example warehouse fulfilment centre map:
 ![fullfilment](../imgs/fulfillment.png)
+
+
+#### Arguments
+
+- `--config CONFIG`: Path to a YAML configuration file that contains the warehouse map generator parameters.
+
+- `--mapWidth MAP_WIDTH`: (Required if --config is not provided) Width of the warehouse.
+- `--mapHeight MAP_HEIGHT`: (Required if --config is not provided) Height of the warehouse.
+- `--output MAP_NAME`: (Required if --config is not provided) Name of the generated warehouse map.
+- `--stationConfig`: (Required if --config is not provided) The file name of the pickup station layout, see the following description.
+- `--stationNumber STATION_NUM`: (Required if --config is not provided) Number of pickup stations to be added in the warehouse.
+- `--stationDistance (default 2)`: distance between two consecutive emitters
+- `--corridorWidth (default 1)`:  distance between two storage blocks
+- `--pillarWidth (default 4)`: width of the pillar
+- `--operWidth (default 5)`: distance between the pickup station and the sotrage area
+- `--storageSize (default [3,2])`: (width, height) of the storage
 
 
 ### 3. Warehouse Task Generator

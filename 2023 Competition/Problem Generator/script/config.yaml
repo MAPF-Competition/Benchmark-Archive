@@ -1,5 +1,5 @@
-mapW: 500
-mapH: 140
-mapName: warehouse_large
-stationNum: 200
+mapWidth: 500
+mapHeight: 140
+output: warehouse_large
+stationNumber: 200
  
