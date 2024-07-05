@@ -28,13 +28,12 @@ The script `warehouse_map_generator.py` is used to create warehouse maps. We dis
 we show how to generate a sortation map. The parameters of the map are given in a pre-specified configuration file (they can also be specified as command line arguments):
 
 ```shell
-python ./script/warehouse_map_generator.py --config ./sortation_config.yaml
+python ./script/warehouse_map_generator.py --config ./sortation_medium.yaml
 ```
-
-In the example below, we show how to generate a warehouse map (again, from a pre-specified configuration file):
+or with command line arguments:
 
 ```shell
-python ./script/warehouse_map_generator.py --config ./fulfillment_config.yaml
+python ./script/warehouse_map_generator.py --mapWidth 200 --mapHeight 140 --output "sortation_medium.map" --stationConfig "sortation_emitter.txt" --storageSize 1 1 --stationDistance 1
 ```
 
 ## Warehouse Task Generator
