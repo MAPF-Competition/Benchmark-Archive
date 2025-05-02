@@ -10,6 +10,10 @@ The following table lists the best-known solutions for the 2023 Main Round evalu
 
 *<sup>Note: the Submission ID in the table is a unique identifier of a submission. It helps to distinguish submissions with the same implementation/code but output solutions with different scores/total errands finished.</sup>*
 
+### Visualisation
+
+Download and unzip the best known solutions, then visualise them with **[PlanViz](https://github.com/MAPF-Competition/PlanViz)**
+
 #### Main Round
 
 | Instance | Total Errands Finished | Domain | # Agents | Simulation Time  | Solution | Team | Implementation | Submission ID |
