@@ -1,0 +1,10 @@
+mapWidth: 57
+mapHeight: 33
+output: "warehouse_small.map"
+stationConfig: "picking_station.txt"
+stationNumber: 1000
+storageSize: [3,2]  # (width, height)
+stationDistance: 2     # distance between two consecutive emitters
+corridorWidth: 1    # distance between two storage blocks
+pillarWidth: 4  # width of the pillar
+operWidth: 5  # distance between the pickup station and the storage area
