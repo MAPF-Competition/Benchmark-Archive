@@ -11,6 +11,10 @@ For each year's League of Robot Runners competition, you will find:
 - Solution metrics and cross-references to implementations that produced the solutions.
 - Python scripts for generating benchmark problems.
 
+## Competition Archives
+
+- [2026 Competition](./2026%20Competition/): Example instances, round evaluation instances, generators, and best-known solutions.
+
 ## Contact
 
 Visit [www.leagueofrobotrunners.org](https://www.leagueofrobotrunners.org/) for more details about the competition, and email the organisers at league-of-robot-runnners [at] googlegroups [dot] com for any questions or feedback.

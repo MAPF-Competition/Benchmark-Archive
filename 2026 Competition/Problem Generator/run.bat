@@ -1,0 +1,12 @@
+@REM python ./script/benchmark_generator.py  --mapFile ./maps/Paris_1_256.map --taskNum 1500  --problemName paris_1_256  --teamSizes 1500 --benchmark_folder ./city.domain --minEPT 2 --maxEPT 5   --revealNum 1.5
+@REM python ./script/benchmark_generator.py  --mapFile ./maps/Paris_1_256.map --taskNum 1500  --problemName paris_1_256  --teamSizes 3000 --benchmark_folder ./city.domain --minEPT 2 --maxEPT 5   --revealNum 1.5
+@REM python ./script/benchmark_generator.py  --mapFile ./maps/random-32-32-20.map --taskNum 100000  --problemName random_32_32_20  --teamSizes 100 --benchmark_folder ./random.domain --minEPT 2 --maxEPT 5   --revealNum 1.5
+@REM python ./script/benchmark_generator.py  --mapFile ./maps/random-32-32-20.map --taskNum 100000  --problemName random_32_32_20  --teamSizes 200 --benchmark_folder ./random.domain --minEPT 2 --maxEPT 5   --revealNum 1.5
+@REM python ./script/benchmark_generator.py  --mapFile ./maps/random-32-32-20.map --taskNum 100000  --problemName random_32_32_20  --teamSizes 700 --benchmark_folder ./random.domain --minEPT 2 --maxEPT 5   --revealNum 1.5
+@REM python ./script/benchmark_generator.py  --mapFile ./maps/random-32-32-20.map --taskNum 100000  --problemName random_32_32_20  --teamSizes 400 --benchmark_folder ./random.domain --minEPT 2 --maxEPT 5   --revealNum 1.5
+@REM python ./script/benchmark_generator.py  --mapFile ./maps/random-32-32-20.map --taskNum 100000  --problemName random_32_32_20  --teamSizes 800 --benchmark_folder ./random.domain --minEPT 2 --maxEPT 5   --revealNum 1.5
+@REM python ./script/benchmark_generator.py  --mapFile ./maps/brc202d.map --taskNum 100000  --problemName brc202d  --teamSizes 6500 --benchmark_folder ./game.domain --minEPT 2 --maxEPT 2   --revealNum 1.5
+@REM python ./script/warehouse_task_generator.py --mapFile ./maps/sortation_large.map --taskNum 100000 --taskFile ./sortation_large.tasks --m_buckets 5 --minEPT 2 --maxEPT 2
+python ./script/warehouse_task_generator.py --mapFile ./maps/warehouse_large.map --taskNum 100000 --taskFile ./warehouse_large.tasks --m_buckets 5 --minEPT 2 --maxEPT 2
+@REM python ./script/benchmark_generator.py  --mapFile  ./maps/sortation_large.map  --problemName sortation_large --taskFile ./sortation_large.tasks --teamSizes 10000 --benchmark_folder ./warehouse.domain --minEPT 2 --maxEPT 2
+@REM python ./script/benchmark_generator.py  --mapFile  ./maps/warehouse_large.map  --problemName warehouse_large --taskFile ./warehouse_large.tasks --teamSizes 10000 --benchmark_folder ./warehouse.domain --minEPT 2 --maxEPT 2

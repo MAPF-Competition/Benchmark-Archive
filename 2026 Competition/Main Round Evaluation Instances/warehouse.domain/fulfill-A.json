@@ -1,0 +1,20 @@
+{
+    "mapFile": "maps/warehouse_long_corridor_large.map",
+    "agentFile": "agents/fulfill-A.agents",
+    "teamSize": 10000,
+    "taskFile": "tasks/fulfill-A.tasks",
+    "numTasksReveal": 1.5,
+    "version": "2026 LoRR",
+    "agentCounter": 5,
+    "agentSize": 1.0,
+    "delayConfig": {
+        "seed": 0,
+        "minDelay": 1,
+        "maxDelay": 40,
+        "eventModel": "bernoulli",
+        "pDelay": 0.02,
+        "durationModel": "uniform",
+        "gaussMeanRatio": 0.5,
+        "gaussStdRatio": 0.22
+    }
+}

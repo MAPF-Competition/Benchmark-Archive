@@ -1,0 +1,289 @@
+from warehouse_task_generator import WarehouseTaskGenerator
+import numpy as np
+import argparse
+import easydict
+import random
+import json
+
+
+import os
+from typing import List
+import sys
+
+import shutil
+from problem_generator import ProblemGenerator
+
+
+def build_delay_config(args):
+    return {
+        "seed": args.delaySeed,
+        "minDelay": args.minDelay,
+        "maxDelay": args.maxDelay,
+        "eventModel": args.eventModel,
+        "pDelay": args.pDelay,
+        "durationModel": args.durationModel,
+        "gaussMeanRatio": args.gaussMeanRatio,
+        "gaussStdRatio": args.gaussStdRatio,
+    }
+
+
+class WarehouseBenchmarkGenerator:
+    def __init__(self, args) -> None:
+        self.args=args
+
+
+    def move_file_to_folder(self,file_path, target_folder):
+        # Get the file name from the file path
+        file_name = os.path.basename(file_path)
+
+        # Create the target folder if it doesn't exist
+        if not os.path.exists(target_folder):
+            os.makedirs(target_folder)
+
+        # Construct the new file path in the target folder
+        new_file_path = os.path.join(target_folder, file_name)
+
+        # Move the file to the target folder
+        try:
+            shutil.move(file_path, new_file_path)
+        except shutil.SameFileError:
+            pass
+        # print(f"File '{file_name}' moved to '{target_folder}'.")
+        return new_file_path
+
+    def copy_file_to_folder(self, file_path, target_folder):
+        # Get the file name from the file path
+        file_name = os.path.basename(file_path)
+
+        # Create the target folder if it doesn't exist
+        if not os.path.exists(target_folder):
+            os.makedirs(target_folder)
+
+        # Construct the new file path in the target folder
+        new_file_path = os.path.join(target_folder, file_name)
+
+        # Copy the file to the target folder
+        try:
+            shutil.copy(file_path, new_file_path)
+        except shutil.SameFileError:
+            pass
+        print(f"File '{file_name}' copied to '{target_folder}'.")
+        return new_file_path
+
+
+    def create_benchmark_folders(self, benchmark_folder):
+        subfolders = ["tasks", "maps", "agents"]
+
+        if not os.path.exists(benchmark_folder):
+            os.mkdir(benchmark_folder)
+            print(f"Folder '{benchmark_folder}' created.")
+
+        for subfolder in subfolders:
+            subfolder_path = os.path.join(benchmark_folder, subfolder)
+            if not os.path.exists(subfolder_path):
+                os.mkdir(subfolder_path)
+                print(f"Subfolder '{subfolder}' created in '{benchmark_folder}'.")
+
+    
+
+        
+    def generate_problem(self):
+        args=self.args
+        print(f"--mapFile: {args.mapFile} (Description: Map file name.)")
+        print(f"--taskFile: {args.taskFile} (Description: Task file.)")
+        print(f"--problemName: {args.problemName} (Description: Problem Name.)")
+        print(f"--teamSizes: {args.teamSizes} (Description: Team sizes.)")
+        print(f"--benchmark_folder: {args.benchmark_folder} (Description: Benchmark folder.)")
+        print(f"--revealNum: {args.revealNum} (Description: Number of tasks revealed.)")
+        # print(f"--taskAssignmentStrategy: {args.taskAssignmentStrategy} (Description: taskAssignmentStrategy.)")
+
+        if args.benchmark_folder:
+            self.create_benchmark_folders(args.benchmark_folder)
+   
+        new_task = self.copy_file_to_folder(args.taskFile,args.benchmark_folder+"/tasks/")
+        new_map = self.copy_file_to_folder(args.mapFile,args.benchmark_folder+"/maps/")
+        delay_config = build_delay_config(args)
+        
+        for num_agents in args.teamSizes:
+            TG=WarehouseTaskGenerator()
+            agent_file=args.problemName+"_"+str(num_agents)+".agents"
+            problemNameK=args.problemName+"_"+str(num_agents)+".json"
+            TG.generate_agents(num_agents,args.mapFile,agent_file)
+            new_agent = self.move_file_to_folder(agent_file,args.benchmark_folder+"/agents/")
+
+            TG.generate_problem(
+                os.path.relpath(new_map,args.benchmark_folder),
+                os.path.relpath(new_agent, args.benchmark_folder),
+                num_agents,
+                os.path.relpath(new_task,args.benchmark_folder),
+                args.revealNum,
+                problemNameK,
+                delay_config=delay_config,
+                agent_counter=args.agentCounter,
+                agent_size=args.agentSize,
+            )
+            self.move_file_to_folder(problemNameK, args.benchmark_folder+"/")
+
+
+
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='League of Robot Runners Benchmark Generator version 2024 .')
+    # Add arguments to the parser
+
+    parser.add_argument('--mapFile', required=True ,type=str, help='Path to an existing map file. The map file is produced by map_generator.py or any grid map in the standard format.')
+    parser.add_argument('--taskFile', help='Path to an existing task file generated by task_generator.py.')
+
+    parser.add_argument('--taskNum', type=int,default=1,  help='Number of tasks in total')
+    parser.add_argument('--problemName',default="problem",help="The name of the output problem file (default name = 'problem')")
+
+    parser.add_argument('--teamSizes', nargs='+', type=int, default=[100,200,300],help='The number of agents in a team. Specify multiple values to generate multiple problems , each with a  different team of agents. eg. [100,200,300, …]')
+    parser.add_argument('--benchmark_folder',default="./", type=str, help='Path to place the resulting problem file. ')
+    parser.add_argument('--revealNum', type=float,default=1.5, help='Number of tasks revealed (>=1).')
+    # parser.add_argument('--taskAssignmentStrategy', type=str,default="roundrobin", help='Task assignment strategy (roundrobin, greedy)')
+
+    parser.add_argument("--minEPT", type=int, default=1, help="Minimum number of locations (>=1)")
+    parser.add_argument("--maxEPT", type=int, default=4, help="Maximum number of locations (>=1)")  
+    parser.add_argument("--delaySeed", type=int, default=0, help="Seed stored in delayConfig.")
+    parser.add_argument("--minDelay", type=int, default=1, help="Minimum delay duration stored in delayConfig.")
+    parser.add_argument("--maxDelay", type=int, default=3, help="Maximum delay duration stored in delayConfig.")
+    parser.add_argument("--eventModel", choices=["bernoulli", "poisson"], default="bernoulli",
+                        help="Delay event model stored in delayConfig.")
+    parser.add_argument("--pDelay", type=float, default=0.02,
+                        help="Per-agent delay probability for bernoulli delay generation.")
+    parser.add_argument("--durationModel", choices=["uniform", "gaussian"], default="gaussian",
+                        help="Delay duration model stored in delayConfig.")
+    parser.add_argument("--gaussMeanRatio", type=float, default=0.5,
+                        help="Gaussian mean ratio inside [minDelay, maxDelay].")
+    parser.add_argument("--gaussStdRatio", type=float, default=0.22,
+                        help="Gaussian std ratio inside [minDelay, maxDelay].")
+    parser.add_argument("--agentCounter", type=int, default=10,
+                        help="Top-level agentCounter value written into each problem JSON.")
+    parser.add_argument("--agentSize", type=float, default=1.0,
+                        help="Top-level agentSize value written into each problem JSON.")
+    # parser.add_argument('--isWarehouse', type=bool, default=True)
+    # Parse the command-line arguments
+    args = parser.parse_args()
+
+    if args.minDelay <= 0:
+        parser.error("--minDelay must be > 0")
+    if args.maxDelay < args.minDelay:
+        parser.error("--maxDelay must be >= --minDelay")
+    if args.agentCounter <= 0:
+        parser.error("--agentCounter must be > 0")
+    if args.agentSize <= 0:
+        parser.error("--agentSize must be > 0")
+    if not 0 <= args.pDelay <= 1:
+        parser.error("--pDelay must be in [0, 1]")
+    return args
+
+
+class RandomBenchmarkGenerator:    
+    def __init__(self, args) -> None:
+        self.args=args
+
+    def move_file_to_folder(self,file_path, target_folder):
+        # Get the file name from the file path
+        file_name = os.path.basename(file_path)
+
+        # Create the target folder if it doesn't exist
+        if not os.path.exists(target_folder):
+            os.makedirs(target_folder)
+
+        # Construct the new file path in the target folder
+        new_file_path = os.path.join(target_folder, file_name)
+
+        # Move the file to the target folder
+        try:
+            shutil.move(file_path, new_file_path)
+        except shutil.SameFileError:
+            pass
+        # print(f"File '{file_name}' moved to '{target_folder}'.")
+        return new_file_path
+
+    def create_benchmark_folders(self, benchmark_folder):
+        subfolders = ["tasks", "maps", "agents"]
+
+        if not os.path.exists(benchmark_folder):
+            os.mkdir(benchmark_folder)
+            print(f"Folder '{benchmark_folder}' created.")
+
+        for subfolder in subfolders:
+            subfolder_path = os.path.join(benchmark_folder, subfolder)
+            if not os.path.exists(subfolder_path):
+                os.mkdir(subfolder_path)
+                print(f"Subfolder '{subfolder}' created in '{benchmark_folder}'.")
+
+    def copy_file_to_folder(self, file_path, target_folder):
+        # Get the file name from the file path
+        file_name = os.path.basename(file_path)
+
+        # Create the target folder if it doesn't exist
+        if not os.path.exists(target_folder):
+            os.makedirs(target_folder)
+
+        # Construct the new file path in the target folder
+        new_file_path = os.path.join(target_folder, file_name)
+
+        # Copy the file to the target folder
+        try:
+            shutil.copy(file_path, new_file_path)
+        except shutil.SameFileError:
+            pass
+        print(f"File '{file_name}' copied to '{target_folder}'.")
+        return new_file_path
+
+    def generate_problem(self):
+        if self.args.benchmark_folder:
+            self.create_benchmark_folders(self.args.benchmark_folder)
+        # new_task = self.copy_file_to_folder(self.args.taskFile,self.args.benchmark_folder+"/tasks/")
+        new_task= self.args.problemName+".tasks"
+        new_map = self.copy_file_to_folder(self.args.mapFile,self.args.benchmark_folder+"/maps/")
+        task_generated=False
+        args=easydict.EasyDict()    
+        
+        args.mapFile=os.path.relpath(new_map,self.args.benchmark_folder)
+        args.taskFile=os.path.relpath(new_task,self.args.benchmark_folder)
+        args.taskFile = os.path.basename(args.taskFile)
+
+
+        args.revealNum=self.args.revealNum
+        args.problemDir=self.args.benchmark_folder
+        args.taskNum=self.args.taskNum
+        args.config=None
+
+        args.minEPT=self.args.minEPT
+        args.maxEPT=self.args.maxEPT
+        args.delaySeed=self.args.delaySeed
+        args.minDelay=self.args.minDelay
+        args.maxDelay=self.args.maxDelay
+        args.eventModel=self.args.eventModel
+        args.pDelay=self.args.pDelay
+        args.durationModel=self.args.durationModel
+        args.gaussMeanRatio=self.args.gaussMeanRatio
+        args.gaussStdRatio=self.args.gaussStdRatio
+        args.agentCounter=self.args.agentCounter
+        args.agentSize=self.args.agentSize
+        PG=ProblemGenerator(args)
+        for num_agents in self.args.teamSizes:
+            args.teamSize=num_agents
+            args.agentFile=self.args.problemName+"_"+str(num_agents)+".agents"
+            args.problemFile=self.args.problemName+"_"+str(num_agents)+".json"
+            PG.reset(team_size=num_agents, agent_file=args.agentFile, prob_file=args.problemFile)
+            PG.generate_problem(task_generated)
+            task_generated=True
+        # self.move_file_to_folder(self.args.benchmark_folder+"/"+new_task, self.args.benchmark_folder+"/tasks/")
+
+
+
+
+if __name__=="__main__":
+    args=parse_arguments()
+    if args.taskFile is not None:
+        WBG=WarehouseBenchmarkGenerator(args)
+        WBG.generate_problem()
+    else:
+        RBG=RandomBenchmarkGenerator(args)
+        RBG.generate_problem()
+    

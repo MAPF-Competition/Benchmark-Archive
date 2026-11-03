@@ -1,0 +1,20 @@
+{
+    "mapFile": "maps/orz900d.map",
+    "agentFile": "agents/orz.agents",
+    "teamSize": 4000,
+    "taskFile": "tasks/orz.tasks",
+    "numTasksReveal": 1.5,
+    "version": "2026 LoRR",
+    "agentCounter": 3,
+    "agentSize": 1.0,
+    "delayConfig": {
+        "seed": 0,
+        "minDelay": 5,
+        "maxDelay": 20,
+        "eventModel": "poisson",
+        "pDelay": 0.001,
+        "durationModel": "uniform",
+        "gaussMeanRatio": 0.5,
+        "gaussStdRatio": 0.22
+    }
+}

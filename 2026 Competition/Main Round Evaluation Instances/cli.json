@@ -1,0 +1,46 @@
+{
+    "maze-A": {
+        "simulation_time": 5000,
+        "communication_time": 3000
+    },
+    "maze-B": {
+        "simulation_time": 4000,
+        "communication_time": 500
+    },
+    "room-A": {
+        "simulation_time": 3000,
+        "communication_time": 600
+    },
+    "room-B": {
+        "simulation_time": 10000,
+        "communication_time": 3000
+    },
+    "rand-A": {
+        "simulation_time": 25000,
+        "communication_time": 250
+    },
+    "fulfill-A": {
+        "simulation_time": 30000,
+        "communication_time": 5000
+    },
+    "fulfill-B": {
+        "simulation_time": 20000,
+        "communication_time": 900
+    },
+    "fulfill-C": {
+        "simulation_time": 25000,
+        "communication_time": 3000
+    },
+    "iron": {
+        "simulation_time": 60000,
+        "communication_time": 3000
+    },
+    "bos": {
+        "simulation_time": 10000,
+        "communication_time": 1500
+    },
+    "orz": {
+        "simulation_time": 40000,
+        "communication_time": 3000
+    }
+}

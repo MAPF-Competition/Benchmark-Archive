@@ -1,0 +1,10 @@
+mapWidth: 500
+mapHeight: 140
+output: "warehouse_long_corridor_large.map"
+stationConfig: "picking_station.txt"
+stationNumber: 1000
+storageSize: [12,1]  # longer shelf blocks to induce long, narrow corridors
+stationDistance: 2
+corridorWidth: 1
+pillarWidth: 4
+operWidth: 5

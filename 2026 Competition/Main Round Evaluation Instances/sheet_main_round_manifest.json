@@ -1,0 +1,145 @@
+{
+    "bos": {
+        "task_count": 17100,
+        "average_task_len": 2.0,
+        "agent_count": 2000,
+        "task_dist": "random",
+        "chosen_event_model": "bernoulli",
+        "chosen_duration_model": "uniform",
+        "delay_probability": 0.002,
+        "delay_range": [
+            50,
+            100
+        ]
+    },
+    "orz": {
+        "task_count": 34920,
+        "average_task_len": 2.0,
+        "agent_count": 4000,
+        "task_dist": "random",
+        "chosen_event_model": "poisson",
+        "chosen_duration_model": "uniform",
+        "delay_probability": 0.001,
+        "delay_range": [
+            10,
+            80
+        ]
+    },
+    "iron": {
+        "task_count": 50000,
+        "average_task_len": 2.0,
+        "agent_count": 10000,
+        "task_dist": "random",
+        "chosen_event_model": "bernoulli",
+        "chosen_duration_model": "uniform",
+        "delay_probability": 0.0005,
+        "delay_range": [
+            50,
+            200
+        ]
+    },
+    "maze-A": {
+        "task_count": 455,
+        "average_task_len": 2.0,
+        "agent_count": 50,
+        "task_dist": "random",
+        "chosen_event_model": "poisson",
+        "chosen_duration_model": "uniform",
+        "delay_probability": 0.001,
+        "delay_range": [
+            50,
+            100
+        ]
+    },
+    "maze-B": {
+        "task_count": 371,
+        "average_task_len": 2.0,
+        "agent_count": 50,
+        "task_dist": "random",
+        "chosen_event_model": "bernoulli",
+        "chosen_duration_model": "gaussian",
+        "delay_probability": 0.02,
+        "delay_range": [
+            10,
+            30
+        ]
+    },
+    "rand-A": {
+        "task_count": 19935,
+        "average_task_len": 3.5167795334838226,
+        "agent_count": 1500,
+        "task_dist": "random",
+        "chosen_event_model": "bernoulli",
+        "chosen_duration_model": "uniform",
+        "delay_probability": 0.015,
+        "delay_range": [
+            1,
+            5
+        ]
+    },
+    "room-A": {
+        "task_count": 7580,
+        "average_task_len": 2.0,
+        "agent_count": 200,
+        "task_dist": "random",
+        "chosen_event_model": "bernoulli",
+        "chosen_duration_model": "uniform",
+        "delay_probability": 0.0005,
+        "delay_range": [
+            100,
+            150
+        ]
+    },
+    "room-B": {
+        "task_count": 3790,
+        "average_task_len": 2.0,
+        "agent_count": 200,
+        "task_dist": "random",
+        "chosen_event_model": "bernoulli",
+        "chosen_duration_model": "uniform",
+        "delay_probability": 0.01,
+        "delay_range": [
+            1,
+            20
+        ]
+    },
+    "fulfill-A": {
+        "task_count": 162200,
+        "average_task_len": 2.500893958076449,
+        "agent_count": 10000,
+        "task_dist": "distance",
+        "chosen_event_model": "bernoulli",
+        "chosen_duration_model": "uniform",
+        "delay_probability": 0.02,
+        "delay_range": [
+            1,
+            40
+        ]
+    },
+    "fulfill-B": {
+        "task_count": 90100,
+        "average_task_len": 2.4968701442841286,
+        "agent_count": 5000,
+        "task_dist": "distance",
+        "chosen_event_model": "bernoulli",
+        "chosen_duration_model": "uniform",
+        "delay_probability": 0.01,
+        "delay_range": [
+            1,
+            10
+        ]
+    },
+    "fulfill-C": {
+        "task_count": 84500,
+        "average_task_len": 2.0,
+        "agent_count": 10000,
+        "task_dist": "random",
+        "chosen_event_model": "poisson",
+        "chosen_duration_model": "uniform",
+        "delay_probability": 0.001,
+        "delay_range": [
+            20,
+            80
+        ]
+    }
+}
